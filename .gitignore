@@ -2,3 +2,5 @@
 .eclipse
 target
 *.ini
+*.iml
+automation.iml
