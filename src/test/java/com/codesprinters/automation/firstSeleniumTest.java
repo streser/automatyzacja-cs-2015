@@ -3,6 +3,7 @@ package com.codesprinters.automation;
 
 
 import java.util.regex.Pattern;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -22,20 +23,28 @@ public class firstSeleniumTest {
     driver = new FirefoxDriver();
     baseUrl = "https://szkolenia.bananascrum.com";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
-
-  @Test
-  public void test() throws Exception {
     driver.get(baseUrl + "/session/new");
     driver.findElement(By.id("login")).clear();
     driver.findElement(By.id("login")).sendKeys("admin");
     driver.findElement(By.id("password")).clear();
     driver.findElement(By.id("password")).sendKeys("password");
     driver.findElement(By.name("commit")).click();
-    assertTrue(isElementPresent(By.id("project_id")));
-    driver.findElement(By.linkText("Logout")).click();
   }
-  
+
+  @Test
+  public void test() throws Exception {
+    
+    assertTrue(isElementPresent(By.id("project_id")));
+    
+  }
+  @Test
+  public void ShouldOpenSprint() throws Exception {
+	  driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div")).click();
+	  assertTrue(isElementPresent(By.id("filter")));
+	  driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a/div")).click();
+	  driver.getPageSource().contains("2015-02-24");
+	  
+  }
 
   @After
   public void tearDown() throws Exception {
