@@ -14,9 +14,7 @@ public class ParametrizedTests {
             "5,6,30",
             "6,7,42" })
     public void shouldMultipleNumbers(int a, int b, int expected) {
-
-            expected = multiply(a, b);
-            Assert.assertEquals(expected, a * b);
+            Assert.assertEquals(expected, multiply(a, b));
 
     }
 
