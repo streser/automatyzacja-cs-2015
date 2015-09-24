@@ -53,6 +53,9 @@ public class FirstUnitTest {
 
     @Before
     public void add(){
+        System.out.println("before2");{
+
+        }
 
     }
 }
