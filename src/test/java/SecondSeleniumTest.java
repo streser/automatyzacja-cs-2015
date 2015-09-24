@@ -1,4 +1,4 @@
-
+package com.example.tests;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class FirstSeleniumTest {
+public class SecondSeleniumTest {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -18,12 +18,12 @@ public class FirstSeleniumTest {
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
-        baseUrl = "https://szkolenia.bananascrum.com";
+        baseUrl = "https://szkolenia.bananascrum.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test
-    public void test() throws Exception {
+    public void testSeleniumTestLogout() throws Exception {
         driver.get(baseUrl + "/session/new");
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
@@ -36,7 +36,7 @@ public class FirstSeleniumTest {
 
     @After
     public void tearDown() throws Exception {
-        //driver.quit();
+        driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
@@ -54,3 +54,4 @@ public class FirstSeleniumTest {
 
 
 }
+
