@@ -34,6 +34,8 @@ public class FirstSeleniumTest {
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("password");
         driver.findElement(By.name("commit")).click();
+        assertTrue(isElementPresent(By.id("project_id")));
+        driver.findElement(By.linkText("Logout")).click();
     }
 
     @After
@@ -54,29 +56,6 @@ public class FirstSeleniumTest {
         }
     }
 
-    private boolean isAlertPresent() {
-        try {
-            driver.switchTo().alert();
-            return true;
-        } catch (NoAlertPresentException e) {
-            return false;
-        }
-    }
-
-    private String closeAlertAndGetItsText() {
-        try {
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            if (acceptNextAlert) {
-                alert.accept();
-            } else {
-                alert.dismiss();
-            }
-            return alertText;
-        } finally {
-            acceptNextAlert = true;
-        }
-    }
 }
 
 
