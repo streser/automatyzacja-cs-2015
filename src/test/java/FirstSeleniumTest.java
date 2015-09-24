@@ -72,7 +72,7 @@ public class FirstSeleniumTest {
 
 
     @Test
-    public void test3() throws Exception {
+    public void test4() throws Exception {
         driver.get(baseUrl + "/session/new");
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
