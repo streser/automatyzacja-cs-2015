@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitParamsRunner.class)
 public class ParametrizedTests {
 
+    //Given
     @Test
     @Parameters({
             "1, 100, 100",
@@ -22,10 +23,13 @@ public class ParametrizedTests {
 
     })
 
+    //When
     public void shouldMultipleNumbers(int p1, int p2, int expected) {
 
         int resultofMultiply = multiply(p1, p2);
 
+
+        //Then
         Assert.assertEquals(expected, resultofMultiply);
         Assert.assertEquals(expected, resultofMultiply);
         Assert.assertEquals(expected, resultofMultiply);
