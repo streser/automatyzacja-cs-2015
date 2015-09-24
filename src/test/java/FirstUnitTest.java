@@ -18,12 +18,12 @@ import java.util.List;
 
 
 public class FirstUnitTest {
-    //static List<Object> spis;
+    static List<Object> spis;
     static List<String> lista;
     @BeforeClass
     public static void setUp() {
         lista = new ArrayList<String>();
-        //spis = new ArrayList<Object>();
+        spis = new ArrayList<Object>();
     }
 
     @Test
@@ -38,16 +38,17 @@ public class FirstUnitTest {
 
     }
 
-    /*@Test
+    @Test
     public void checkIfStringHasDigits() {
         spis.add(new Integer(12345));
         assertEquals(spis.get(0),12345);
-    }*/
+    }
 
-    @After
+    /*@After
     public void usunElementListy() {
         lista.remove("Adam");
         assertEquals(1, lista.size());
 
     }
+    */
 }

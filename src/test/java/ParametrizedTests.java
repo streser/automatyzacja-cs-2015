@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 public class ParametrizedTests {
 
     @Test
-    @Parameters({"2,3,6",
+    @Parameters({"100,3,300",
             "3,4,12",
             "4,5,20",
             "5,6,30",
