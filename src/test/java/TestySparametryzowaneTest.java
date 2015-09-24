@@ -14,7 +14,7 @@ public class TestySparametryzowaneTest {
             "5, 5, 25",
             "6, 6, 36"})
     public void Mnozenie(int a, int b, int expected) {
-        int result = multiply(a,b);
+        int result = a*b;
        Assert.assertEquals(expected, result);
 
     }
