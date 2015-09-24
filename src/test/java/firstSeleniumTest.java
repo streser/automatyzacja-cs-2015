@@ -29,13 +29,35 @@
             driver.findElement(By.id("password")).clear();
             driver.findElement(By.id("password")).sendKeys("password");
             driver.findElement(By.name("commit")).click();
+
+//timeline
+            driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a/div")).click();
+            driver.findElement(By.xpath("//div[1]/div[2]/div[6]/div[6]/div[5]"));
+            Assert.assertTrue(isElementPresent(By.xpath("//div[1]/div[2]/div[6]/div[6]/div[5]")));
+
+            driver.findElement(By.xpath("//div[2]/div[3]/ul/li[4]/a/div")).click();
+
+
+            /*
+            driver.findElement(new By.ByXPath("//html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div")).click();
+            isElementPresent(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[2]/table/tbody/tr[2]/td[2]/a"));
+            Assert.assertTrue(isElementPresent("/html/body/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[2]/table/tbody/tr[2]/td[2]/a"));
+
+            driver.findElement(new By.ByXPath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div")).click();
+            isElementPresent(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[6]/div[3]/ul/li/div[5]/div[2]"));
+            Assert.assertTrue(isElementPresent("/html/body/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[6]/div[3]/ul/li/div[5]/div[2]"));
+
+            driver.findElement(new By.ByXPath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a/div")).click();
+            isElementPresent(By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[6]/div[3]/ul/li/div[5]/div[2]"));
+            Assert.assertTrue(isElementPresent("/html/body/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[6]/div[3]/ul/li/div[5]/div[2]"));
+*/
             assertTrue(isElementPresent(By.id("project_id")));
             driver.findElement(By.linkText("Logout")).click();
         }
 
         @After
         public void tearDown() throws Exception {
-            driver.quit();
+            //driver.quit();
             String verificationErrorString = verificationErrors.toString();
             if (!"".equals(verificationErrorString)) {
                 fail(verificationErrorString);
