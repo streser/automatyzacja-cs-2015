@@ -26,6 +26,7 @@ public class FirstUnitTest {
     public void ShouldAddElementToArray() {
 
             lk.add(100);
+        System.out.println(lk.size());
 
         //Then
         Assert.assertTrue(lk.contains(3));
@@ -42,11 +43,12 @@ public class FirstUnitTest {
             System.out.println(lk.size());
             System.out.println(i);
             lk.remove(i);
+            System.out.println(lk.size());
         }
 
 
         Assert.assertTrue(lk.isEmpty());
-       Assert.assertEquals( 0,lk.size());
+       Assert.assertEquals(0, lk.size());
 
 
         Assert.assertFalse(lk.contains(100));
