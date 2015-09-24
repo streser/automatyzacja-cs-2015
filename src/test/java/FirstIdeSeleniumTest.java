@@ -19,11 +19,15 @@ public class FirstIdeSeleniumTest{
         driver = new FirefoxDriver();
         baseUrl = "https://szkolenia.bananascrum.com";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        /*
+        za kazdym razem bedzie czekal do 30 sekund na zaladowanie strony
+        globalne
+        */
     }
 
     @Test
     public void testSeleniumIde() throws Exception {
-        driver.get(baseUrl + "/session/new");
+        driver.get(baseUrl + "/session/new"); //otwiera strobe pod jakims URL
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).clear();
@@ -31,11 +35,12 @@ public class FirstIdeSeleniumTest{
         driver.findElement(By.name("commit")).click();
         assertTrue(isElementPresent(By.id("project_id")));
         driver.findElement(By.linkText("Logout")).click();
+
     }
 
     @After
     public void tearDown() throws Exception {
-//        driver.quit();
+        driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
