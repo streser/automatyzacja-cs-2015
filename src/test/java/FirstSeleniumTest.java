@@ -31,6 +31,15 @@ public class FirstSeleniumTest {
         driver.findElement(By.id("password")).sendKeys("password");
         driver.findElement(By.name("commit")).click();
         assertTrue(isElementPresent(By.id("project_id")));
+
+        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div")).click();
+        assertTrue(driver.getPageSource().contains("Impediments"));
+        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a/div")).click();
+        assertTrue(driver.getPageSource().contains("test"));
+        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div")).click();
+        assertTrue(driver.getPageSource().contains("Product backlog"));
+        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a")).click();
+        assertTrue(driver.getPageSource().contains("Product backlog"));
         driver.findElement(By.linkText("Logout")).click();
     }
 
