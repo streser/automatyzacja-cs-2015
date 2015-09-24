@@ -1,4 +1,5 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,8 +10,12 @@ import java.util.List;
  */
 public class FirstUnitTest {
 
+    @Before
+    public void setup() {
+    }
+
     @Test
-    public void shoudAddElementToArray(){
+    public void shoudAddElementToArray() {
         //given
         List<String> myList = new ArrayList<String>();
 
@@ -24,4 +29,23 @@ public class FirstUnitTest {
         Assert.assertFalse(myList.contains("Lukas"));
 
     }
+
+    @Test
+    public void shoudAddElementfromList() {
+        //given
+        List<String> myList = new ArrayList<String>();
+        myList.add("Ola");
+
+
+        //when
+        myList.remove("Ola");
+
+        //then}
+        Assert.assertTrue(myList.isEmpty());
+    }
+
+
+    public void nazwa() {
+    }
+
 }
