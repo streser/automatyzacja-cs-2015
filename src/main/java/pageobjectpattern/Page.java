@@ -2,6 +2,8 @@ package pageobjectpattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Page {
 
@@ -18,5 +20,15 @@ public abstract class Page {
 	}catch (Exception e) {
 		return false;
 	}
+	
+	}
+	protected void click(By locator) {
+		driver.findElement(locator).click();
+	}
+	
+	void waitFor(By locator){
+		WebDriverWait wait = new WebDriverWait (driver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		
 	}
 }
