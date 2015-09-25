@@ -1,9 +1,18 @@
 package pageobjectpattern;
 
+
+import org.openqa.selenium.WebDriver;
+
 /**
  * Created by Administrator on 2015-09-25.
  */
-public class BacklogPage {
+public class BacklogPage extends Page {
+
+
+    public BacklogPage(WebDriver driver) {
+        super(driver);
+    }
+
     public boolean isOpen() {
         return false;
     }
