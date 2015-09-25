@@ -11,13 +11,7 @@ public class BackLogPage extends Page {
 	}
 
 	public boolean isOpen() {
-		try{
-			driver.findElement(By.id("project_id"));
-			return true;
-		}catch (Exception e) {
-			return false;
-		}
-		
+		return isElementPresent(By.id("project_id"));
 	}
 
 }
