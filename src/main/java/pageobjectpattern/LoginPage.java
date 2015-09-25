@@ -1,11 +1,14 @@
 package pageobjectpattern;
 
-/**
- * Created by md on 25.09.15.
- */
-public class LoginPage {
-    public void open() {
+import org.openqa.selenium.WebDriver;
 
+public class LoginPage extends Page {
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public void open() {
     }
 
     public BacklogPage logIn(String login, String password) {
