@@ -3,7 +3,7 @@ package pageobjectpattern;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BananaScrumLogInTest extends PageObjectPatternBase{
+public class BananaScrumLogInTest extends PageObjectPatternBase {
 
     @Test
     public void shouldLogIn() {
@@ -12,5 +12,5 @@ public class BananaScrumLogInTest extends PageObjectPatternBase{
         BacklogPage bp = lp.logIn("admin", "password");
         Assert.assertTrue(bp.isOpen());
     }
-    }
+}
 
