@@ -12,6 +12,6 @@ public class BacklogPage extends Page {
     }
 
     public boolean isOpen() {
-        return isElementPresent(By.id("projeckt_id"));
+        return isElementPresent(By.id("project_id"));
     }
 }
