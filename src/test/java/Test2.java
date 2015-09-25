@@ -19,7 +19,7 @@ public class Test2 {
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
-        baseUrl = "https://szkolenia.bananascrum.com/";
+        baseUrl = "https://szkolenia.bananascrum.com";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
