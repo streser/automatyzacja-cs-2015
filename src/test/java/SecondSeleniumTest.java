@@ -1,16 +1,20 @@
 
 
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class SecondSeleniumTest {
+
+    //public static final String SPRINT_LINK_XPATH = "/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div";
+    public static final By SPRINT_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div");
+    public static final By SPRINT_LIST_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a/div");
+    public static final By BACKLOG_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div");
+    public static final By TIMELINE_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a/div");
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -24,34 +28,56 @@ public class SecondSeleniumTest {
     }
 
     @Test
-    public void test() throws Exception {
+    public void shouldLogInLogOut() throws Exception {
+        open();
+
+        login();
+
+        //assertTrue(isElementPresent(By.id("project_id")));
+
+        //click(By.xpath(SPRINT_LINK_XPATH));
+
+
+        click(SPRINT_MENU);
+        assertPageSourceContains("Impediments");
+
+
+        click(SPRINT_LIST_MENU);
+        assertPageSourceContains("Sprints list");
+
+
+        click(BACKLOG_MENU);
+        assertPageSourceContains("Product backlog");
+
+
+        click(TIMELINE_MENU);
+        assertPageSourceContains("Sprint load history");
+
+        logout();
+    }
+
+    private void assertPageSourceContains(String text) {
+        assertTrue(driver.getPageSource().contains(text));
+    }
+
+    private void click(By locator) {
+        driver.findElement(locator).click();
+    }
+
+    private void open() {
         driver.get(baseUrl + "/session/new");
+    }
+
+    private void logout() {
+        click(By.linkText("Logout"));
+    }
+
+    private void login() {
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
-        assertTrue(isElementPresent(By.id("project_id")));
-
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div")).click();
-
-        //ktora to zakladka?
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("Impediments"));
-
-        //ktora to zakladka?
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("Sprints list"));
-
-        //ktora to zakladka? backlog
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("Product backlog"));
-
-        //ktora to zakladka?
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("Sprint load history"));
-
-        driver.findElement(By.linkText("Logout")).click();
+        click(By.name("commit"));
     }
 
     @After
