@@ -58,6 +58,8 @@ public class SeleniumBase {
             driver.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
+        System.out.println(e.getMessage());
+
             return false;
         }
     }
