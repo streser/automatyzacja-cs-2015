@@ -1,6 +1,7 @@
 package pageobjectpattern;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -14,6 +15,12 @@ public class BacklogPage extends Page{
     }
 
     public boolean isOpen() {
-        return open;
+        try {
+            driver.findElement(By.id("project_id"));
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 }
