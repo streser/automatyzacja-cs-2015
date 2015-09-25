@@ -12,7 +12,7 @@ public class BananascrumBasicTest extends SeleniumBase {
     public void test() throws Exception {
         driver.get(baseUrl + "/session/new");
         logIn();
-        //sprint_tab
+//sprint_tab
         click(MENU_SPRINT);
         assertSourcePageContains("Turtle");
 //backlog  assertTrue(driver.getPageSource().contains
