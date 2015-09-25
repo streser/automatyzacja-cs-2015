@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,10 @@ import static org.junit.Assert.fail;
  */
 public class BookmarksDisplay {
 
+    public static final By MENU_SPRINT = By.xpath("//*[@id=\"top-menu\"]/li[4]/a/div");
+    public static final By MENU_SPRINTS_LIST = By.xpath("//*[@id=\"top-menu\"]/li[3]/a/div");
+    public static final By BACKLOG_MENU = By.xpath("//*[@id=\"top-menu\"]/li[2]/a/div");
+    public static final By TIMELINE_MENU = By.xpath("//*[@id=\"top-menu\"]/li[1]/a/div");
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -26,6 +31,8 @@ public class BookmarksDisplay {
     @Before
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
+//        driver = new HtmlUnitDriver();
+
         baseUrl = "https://szkolenia.bananascrum.com";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         /*
@@ -35,50 +42,69 @@ public class BookmarksDisplay {
     }
 
     @Test
-    public void ShouldLogin() throws Exception {
-        driver.get(baseUrl + "/session/new"); //otwiera strone pod jakims URL
-        driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
+    public void shouldLoginLogout() throws Exception {
+        open();
+        login();
         assertTrue(isElementPresent(By.id("project_id")));
+        logOut();
 
 
     }
 
-    @Test
-     public  void ShouldDisplayBookmarks () throws Exception{
+    private void logOut() {
+        click(By.linkText("Logout"));
+    }
 
-
-        driver.get(baseUrl + "/session/new"); //otwiera strone pod jakims URL
+    private void login() {
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
+        click(By.name("commit"));
+    }
 
-        driver.findElement(By.xpath("//*[@id=\"top-menu\"]/li[4]/a/div")).click();
-        Assert.assertTrue(driver.getPageSource().contains("szkolenia"));
-        driver.findElement(By.xpath("//*[@id=\"top-menu\"]/li[3]/a/div")).click();
-        Assert.assertTrue(driver.getPageSource().contains("Sprints list"));
-        driver.findElement(By.xpath("//*[@id=\"top-menu\"]/li[2]/a/div")).click();
-        Assert.assertTrue(driver.getPageSource().contains("Product backlog"));
-        driver.findElement(By.xpath("//*[@id=\"top-menu\"]/li[1]/a/div")).click();
-        Assert.assertTrue(driver.getPageSource().contains("Project graphs and statistics"));
+    @Test
+    public void shouldOpenMenuTabs() throws Exception {
 
+
+        open();
+        login();
+
+        click(MENU_SPRINT);
+        assertPageSourceContains("szkolenia");
+
+        click(MENU_SPRINTS_LIST);
+        assertPageSourceContains("Sprints list");
+
+        click(BACKLOG_MENU);
+        assertPageSourceContains("Product backlog");
+
+        click(TIMELINE_MENU);
+        assertPageSourceContains("Project graphs and statistics");
+        logOut();
 
 //        driver.findElement(By.name("commit")).click();
 //        driver.findElement(By.name("commit")).click();
 //        driver.findElement(By.
 
 
+    }
 
-        }
+    private void click(By locator) {
+        driver.findElement(locator).click();
+    }
+
+    private void assertPageSourceContains(String Text) {
+        Assert.assertTrue(driver.getPageSource().contains(Text));
+    }
 
 
-//        driver.findElement(By.linkText("Logout")).click();
+    private void open() {
+        driver.get(baseUrl + "/session/new"); //otwiera strone pod jakims URL
+    }
 
+
+//
 
 
     @After
@@ -91,8 +117,6 @@ public class BookmarksDisplay {
     }
 
 
-
-
     private boolean isElementPresent(By by) {
         try {
             driver.findElement(by);
@@ -101,8 +125,6 @@ public class BookmarksDisplay {
             return false;
         }
     }
-
-
 
 
 }
