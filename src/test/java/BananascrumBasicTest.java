@@ -6,24 +6,10 @@
     import org.openqa.selenium.*;
     import org.openqa.selenium.firefox.FirefoxDriver;
 
-    public class firstSeleniumTest {
+    public class BananascrumBasicTest extends SeleniumBase {
 
-        public static final By MENU_SPRINT = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div");
-        public static final By BACKLOG_TAB = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div");
-        private WebDriver driver;
-        private String baseUrl;
-        private boolean acceptNextAlert = true;
-
-        @Before
-        public void setUp() throws Exception {
-            driver = new FirefoxDriver();
-            open();
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        }
-
-        private void open() {
-            baseUrl = "https://szkolenia.bananascrum.com";
-        }
+        public static final By MENU_SPRINT = By.xpath("//div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div");
+        public static final By BACKLOG_TAB = By.xpath("//div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div");
 
         @Test
         public void test() throws Exception {
@@ -53,40 +39,7 @@
             logOut();
         }
 
-        private void assertSourcePageContains(String text) {
-            assertTrue(driver.getPageSource().contains(text));
-        }
-
-        private void click(By locator) {
-            driver.findElement(locator).click();
-        }
-
-        private void logOut() {
-            click(By.linkText("Logout"));
-        }
-
-        private void logIn() {
-            driver.findElement(By.id("login")).clear();
-            driver.findElement(By.id("login")).sendKeys("admin");
-            driver.findElement(By.id("password")).clear();
-            driver.findElement(By.id("password")).sendKeys("password");
-            click(By.name("commit"));
-        }
-
-        @After
-        public void tearDown() throws Exception {
-            driver.quit();
-            }
-        }
-
-        private boolean isElementPresent(By by) {
-            try {
-                driver.findElement(by);
-                return true;
-            } catch (NoSuchElementException e) {
-                return false;
-            }
-        }
+    }
 
     }
 
