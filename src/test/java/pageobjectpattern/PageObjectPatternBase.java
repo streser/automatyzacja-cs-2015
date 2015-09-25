@@ -38,5 +38,7 @@ public class PageObjectPatternBase {
     }
 
     protected void logIn() {
+
     }
+    protected void addItem() {}
 }
