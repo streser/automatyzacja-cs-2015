@@ -1,10 +1,9 @@
 package pageobjectpattern;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created by Administrator on 2015-09-25.
- */
+
 public class BacklogPage extends Page {
     private boolean open;
 
@@ -13,6 +12,6 @@ public class BacklogPage extends Page {
     }
 
     public boolean isOpen() {
-        return open;
+        return isElementPresent(By.id("projeckt_id"));
     }
 }

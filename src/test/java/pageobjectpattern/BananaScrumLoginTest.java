@@ -11,5 +11,6 @@ public class BananaScrumLoginTest extends PageObjectPatterBase {
         lp.open();
         BacklogPage bp = lp.logIn("admin", "password");
         Assert.assertTrue(bp.isOpen());
+
     }
 }
