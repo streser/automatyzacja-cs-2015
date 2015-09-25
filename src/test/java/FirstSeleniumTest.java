@@ -1,16 +1,17 @@
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class FirstSeleniumTest {
+    public static final By SPRING_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a");
+    public static final String SPRING_LIST_MENU = "/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a";
+    public static final String BACKLOG_MENU = "/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a";
+    public static final String TIMLINE_MENU = "/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a";
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -24,17 +25,25 @@ public class FirstSeleniumTest {
     }
 
     @Test
-    public void test1() throws Exception {
+    public void shouldLogInn() throws Exception {
+        open();
+        loggInn();
+        assertElementPresent(By.id("project_id"));
+        logOut();
+
+
+    }
+
+    private void assertElementPresent(By locator) {
+        assertTrue(isElementPresent(locator));
+    }
+
+    private void open() {
         driver.get(baseUrl + "/session/new");
-        driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
-        assertTrue(isElementPresent(By.id("project_id")));
-        driver.findElement(By.linkText("Logout")).click();
+    }
 
-
+    private void logOut() {
+        click(By.linkText("Logout"));
     }
 
     @After
@@ -59,32 +68,40 @@ public class FirstSeleniumTest {
     }
 
     @Test
-    public void test2() throws Exception {
-        driver.get(baseUrl + "/session/new");
+    public void shouldGoToFirst() throws Exception {
+        open();
+        loggInn();
+        click(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a"));
+        assertPageSourceContains("Impediments");
+    }
+
+    private void assertPageSourceContains(String text) {
+        assertTrue(driver.getPageSource().contains(text));
+    }
+
+    private void loggInn() {
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a")).click();
-        assertTrue(driver.getPageSource().contains("Impediments"));
+        click(By.name("commit"));
     }
 
 
     @Test
     public void test4() throws Exception {
-        driver.get(baseUrl + "/session/new");
-        driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("admin");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a")).click();
-        assertTrue(driver.getPageSource().contains("Impediments"));
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a")).click();
-        assertTrue(driver.getPageSource().contains(" Sprints list "));
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a")).click();
-        assertTrue(driver.getPageSource().contains("User Story"));
+        open();
+        loggInn();
+        click(By.xpath(SPRING_LIST_MENU));
+        assertPageSourceContains("Impediments");
+        click(By.xpath(BACKLOG_MENU));
+        assertPageSourceContains(" Sprints list ");
+        click(By.xpath(TIMLINE_MENU));
+        assertPageSourceContains("User Story");
+    }
+
+    private void click(By locator) {
+        driver.findElement(locator).click();
     }
 }
 
