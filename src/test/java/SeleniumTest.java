@@ -1,15 +1,17 @@
 
 
-import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class SeleniumTest {
+    public static final By SPRINT_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div");
+    public static final By SPRINT_LIST_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a/div");
+    public static final By BACKLOG_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div");
+    public static final By TIMELINE_MENU = By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a");
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -24,23 +26,47 @@ public class SeleniumTest {
 
     @Test
     public void test() throws Exception {
+        open();
+        login();
+        assertElementPresent(By.id("project_id"));
+
+        click(SPRINT_MENU);
+        assertPageSourceCointains("Impediments");
+        click(SPRINT_LIST_MENU);
+        assertPageSourceCointains("test");
+        click(BACKLOG_MENU);
+        assertPageSourceCointains("Product backlog");
+        click(TIMELINE_MENU);
+        assertPageSourceCointains("Product backlog");
+        logout();
+    }
+
+    private void assertElementPresent(By locator) {
+        assertTrue(isElementPresent(locator));
+    }
+
+    private void assertPageSourceCointains(String text) {
+        assertTrue(driver.getPageSource().contains(text));
+    }
+
+    private void click(By locator) {
+        driver.findElement(locator).click();
+    }
+
+    private void open() {
         driver.get(baseUrl + "/session/new");
+    }
+
+    private void logout() {
+        click(By.linkText("Logout"));
+    }
+
+    private void login() {
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("password");
-        driver.findElement(By.name("commit")).click();
-        assertTrue(isElementPresent(By.id("project_id")));
-
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[4]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("Impediments"));
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[3]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("test"));
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[2]/a/div")).click();
-        assertTrue(driver.getPageSource().contains("Product backlog"));
-        driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/div[2]/div[3]/ul/li[1]/a")).click();
-        assertTrue(driver.getPageSource().contains("Product backlog"));
-        driver.findElement(By.linkText("Logout")).click();
+        click(By.name("commit"));
     }
 
     @After
