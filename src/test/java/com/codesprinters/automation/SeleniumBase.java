@@ -28,7 +28,7 @@ public class SeleniumBase {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(baseUrl + "/session/new");
 	
-		logIn();
+		
 	}
 
 	private void logOut() {

@@ -1,6 +1,12 @@
 package pageobjectpattern;
 
-public class LogInPage {
+import org.openqa.selenium.WebDriver;
+
+public class LogInPage extends Page  {
+
+	public LogInPage(WebDriver driver) {
+		super(driver);
+	}
 
 	public void open() {
 		// TODO Auto-generated method stub
