@@ -10,7 +10,7 @@ public class BananaScrumLogInTest extends PageObject {
     public void shouldLogIn() {
         LoginPage lp = new LoginPage(driver);
         lp.open();
-        BacklogPage bp = lp.logIn("admin", "password ");
+        BacklogPage bp = lp.logIn("admin", "password");
         Assert.assertTrue(bp.isOpen());
     }
 }
